@@ -7,7 +7,8 @@ import icoWeb from './Imgs/icoWeb.png'
 import icoFace from './Imgs/icoFace.png'
 import icoInsta from './Imgs/icoInsta.png'
 import ImgDupla from './Imgs/ImgDupla.png'
-import Dialog from './Template/Dialog/Dialog'
+import Youtube from './Imgs/Youtube.png'
+
 import { useEffect, useRef, useState } from 'react'
 import Modal from './Template/Dialog/Modal'
 //lembrar de mudar os links do instagram e facebook!
@@ -85,6 +86,9 @@ function App() {
           </a>
           <a href="https://www.instagram.com/topsapp10" className='w-14 h-14'>
             <img src={icoInsta} alt=""/>
+          </a>
+          <a href="https://www.youtube.com/@TopSappTV" className='w-14 h-14'>
+            <img src={Youtube} alt=""/>
           </a>
         </div>
       </section>
