@@ -1,22 +1,53 @@
-import React from 'react'
+import { useEffect, useRef, useState } from 'react'
 interface props{
     texto: string,
     imagem: string
     url:string
+    label?:string
+    onClick?:() => void
 }
 export default function Clickable({
     texto,
     imagem,
-    url
+    url,
+    label,
+    onClick
 }:props) {
-  return (
-    <a className='flex items-center group' href={url}>
-        <div className="rounded-full w-20 h-20 bg-gray-800 z-10 ">
-            <img src={imagem} alt="" className='w-full h-full object-contain' />
+    const imageRef = useRef<HTMLImageElement>(null)
+    const [imageWidth, setImageWidth] = useState(0)
+
+    useEffect(() => {
+        if(imageRef.current){
+            imageRef.current.addEventListener('load', () => {
+                setImageWidth(imageRef.current!.width);
+            });
+        }
+    }, [imageRef.current])
+
+    const styles = {
+        paddingLeft: `calc(${imageWidth}px - 0.5rem)`
+    }
+    const clickHandler = (e:React.MouseEvent<HTMLAnchorElement>) => {
+        if(onClick){
+            e.preventDefault()
+            onClick()
+        }
+    }
+    return (
+    <a className='' href={url} onClick={clickHandler}>
+        <div className='flex items-center group'>
+            <div className="rounded-full min-w-20 h-20 z-10 " >
+                <img src={imagem} alt="" className='h-full object-contain' ref={imageRef}/>
+            </div>
+            <div className='text-lg lg:text-md xl:text-lg  border-[#36b4ee] border-[1px] h-12 group-hover:brightness-105 rounded-r-lg group-hover:rounded-r-xl transition-all relative -left-2 bg-[#0191d9] uppercase text-white font-semibold text-md justify-center flex items-center p-4 px-14 xl:px-14 flex-1'>
+                {texto}
+            </div>
         </div>
-        <div className='border-[#fb9d05] border-[1px] h-12 group-hover:brightness-105 group-hover:rounded transition-all relative -left-2 bg-[#eb7c00] uppercase text-white font-semibold text-md justify-center flex items-center p-4'>
-            {texto}
+        <div className="text-white font-semibold text-sm  w-full uppercase flex justify-center  -mt-3" style={styles}>
+            <span className=''>
+                {label}
+            </span>
         </div>
     </a>
-  )
+    )
 }
