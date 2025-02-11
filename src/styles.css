@@ -1,0 +1,14 @@
+.icon-animation {
+    transition: transform 0.3s ease;
+  }
+  
+  .icon-animation:hover {
+    transform: scale(1.1); /* Aumenta o tamanho do ícone em 10% */
+  }
+
+  @media (max-width: 500px) {
+    .flex {
+      row-gap: 30px;
+    }
+  }
+  
